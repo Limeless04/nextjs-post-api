@@ -30,9 +30,6 @@ export default function TabMenu() {
               {menu.key}
             </TabsTrigger>
           ))}
-          {/* <TabsTrigger value="query">Query</TabsTrigger>
-          <TabsTrigger value="headers">Headers</TabsTrigger>
-          <TabsTrigger value="body">Body</TabsTrigger> */}
         </TabsList>
         <TabQuery />
         <TabBody />

@@ -19,6 +19,7 @@ export default function RootLayout({
             <h1 className="text-2xl">Nextjs Postman</h1>
           </div>
         </nav>
+
         {children}
       </body>
     </html>

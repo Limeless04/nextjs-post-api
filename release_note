@@ -1,0 +1,7 @@
+v1.0.0
+
+- finishing nextjs-post-api
+- all feature implemented (GET, POST, PUT/PATCH, DELETE)
+- query implemented
+- headers implemented
+- body implemented

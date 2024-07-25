@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
+import { useFormStore } from "@/stores/useStateForm";
 
 type QueryItemProps = {
   queryName: string;
@@ -80,19 +81,21 @@ function QueryItem({
   );
 }
 
-type QueryItemType = {
+export type QueryItemType = {
   queryName: string;
   queryValue: string;
   isChecked: boolean;
 };
 export default function QueryForm() {
-  const [queryItems, setQueryItems] = useState<QueryItemType[]>([
-    {
-      queryName: "",
-      queryValue: "",
-      isChecked: false,
-    },
-  ]);
+  const {
+    querys: queryItems,
+    setQuery: setQueryItems,
+    removeQuery,
+  } = useFormStore((state) => ({
+    querys: state.querys,
+    setQuery: state.setQuery,
+    removeQuery: state.removeQuery,
+  }));
 
   const handleChange = (
     index: number,
@@ -121,7 +124,7 @@ export default function QueryForm() {
     if (!isChecked && queryItems.length > 1) {
       console.log(queryItems);
       // Remove the last item by slicing off the last element
-      setQueryItems((prevItems) => prevItems.slice(0, -1));
+      removeQuery();
     } else if (isChecked && index === queryItems.length - 1) {
       // Add a new item if the current item is checked and it is the last item
       newQueryItems.push({
@@ -135,7 +138,7 @@ export default function QueryForm() {
 
   const handleDelete = () => {
     if (queryItems.length > 1) {
-      setQueryItems((prevItems) => prevItems.slice(0, -1));
+      removeQuery();
     }
   };
   return (

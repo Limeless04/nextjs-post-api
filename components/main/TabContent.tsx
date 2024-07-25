@@ -8,11 +8,12 @@ import {
 import QueryForm from "./QueryForm";
 import HeadersForm from "./HeadersForm";
 import { Textarea } from "@/components/ui/textarea";
+import { useFormStore } from "@/stores/useStateForm";
 
 export function TabQuery() {
   return (
     <TabsContent value="query">
-      <Accordion type="single" collapsible>
+      <Accordion type="single" collapsible defaultValue="item-1">
         <AccordionItem value="item-1">
           <AccordionTrigger>Query Parameters</AccordionTrigger>
           <AccordionContent className="p-4 border rounded-lg flex items-center space-x-4 w-full">
@@ -27,7 +28,7 @@ export function TabQuery() {
 export function TabHeaders() {
   return (
     <TabsContent value="headers">
-      <Accordion type="single" collapsible>
+      <Accordion type="single" collapsible defaultValue="item-1">
         <AccordionItem value="item-1">
           <AccordionTrigger>Http Headers</AccordionTrigger>
           <AccordionContent className="p-4 border rounded-lg flex items-center space-x-4 w-full">
@@ -40,13 +41,20 @@ export function TabHeaders() {
 }
 
 export function TabBody() {
+  const { body, setBody } = useFormStore((state) => ({
+    body: state.body,
+    setBody: state.setBody,
+  }));
+  const handleChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setBody(event.target.value);
+  };
   return (
     <TabsContent value="body">
-      <Accordion type="single" collapsible>
+      <Accordion type="single" collapsible defaultValue="item-1">
         <AccordionItem value="item-1">
           <AccordionTrigger>Json Body</AccordionTrigger>
           <AccordionContent>
-            <Textarea />
+            <Textarea onChange={handleChange} />
           </AccordionContent>
         </AccordionItem>
       </Accordion>

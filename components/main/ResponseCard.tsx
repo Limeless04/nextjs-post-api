@@ -6,22 +6,31 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { useState, Suspense } from "react";
-import { useFormStore } from "@/stores/useStateForm";
-import { useFormStatus } from "react-dom";
 import ResponseCardLoading from "../loading/ResponseCardLoading";
+import { useFormStore } from "@/stores/useStateForm";
+function Spinner() {
+  return (
+    <div className="flex justify-center items-center">
+      <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-blue-500"></div>
+    </div>
+  );
+}
 
 function ResponseContent() {
   const { data } = useFormStore((state) => ({ data: state.data }));
-
+  const { loading, responseDetail } = useFormStore((state) => ({
+    loading: state.loading,
+    responseDetail: state.responseDetail,
+  }));
   return (
     <>
       <section className="flex space-x-40 p-2">
-        <p>Status: </p>
-        <p>Size: </p>
-        <p>Time: </p>
+        <p>Status: {responseDetail.status} </p>
+        <p>Size: {responseDetail.size} </p>
+        <p>Time: {responseDetail.time} </p>
       </section>
       <section className="border p-2 rounded-lg bg-gray-100">
-        <pre>{JSON.stringify(data, null, 2)}</pre>
+        {loading ? <Spinner /> : <pre>{JSON.stringify(data, null, 2)}</pre>}
       </section>
     </>
   );

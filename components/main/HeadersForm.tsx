@@ -3,6 +3,8 @@ import React, { useState } from "react";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
+import { useFormStore } from "@/stores/useStateForm";
+
 type HeaderItemProps = {
   headerName: string;
   headerValue: string;
@@ -79,31 +81,22 @@ function HeaderItem({
   );
 }
 
-type HeaderItemType = {
+export type HeaderItemType = {
   headerName: string;
   headerValue: string;
   isChecked: boolean;
 };
 
 export default function HeadersForm() {
-  const [headerItems, setHeaderItems] = useState<HeaderItemType[]>([
-    {
-      headerName: "Accept",
-      headerValue: "*/*",
-      isChecked: true,
-    },
-    {
-      headerName: "User-Agent",
-      headerValue:
-        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36",
-      isChecked: true,
-    },
-    {
-      headerName: "",
-      headerValue: "",
-      isChecked: false,
-    },
-  ]);
+  const {
+    headers: headerItems,
+    setHeaders: setHeaderItems,
+    removeHeader,
+  } = useFormStore((state) => ({
+    headers: state.headers,
+    setHeaders: state.setHeaders,
+    removeHeader: state.removeHeader,
+  }));
 
   const handleChange = (
     index: number,
@@ -135,7 +128,7 @@ export default function HeadersForm() {
     if (!isChecked && headerItems.length > 3) {
       console.log(headerItems);
       // Remove the last item by slicing off the last element
-      setHeaderItems((prevItems) => prevItems.slice(0, -1));
+      removeHeader();
     } else if (isChecked && index === headerItems.length - 1) {
       // Add a new item if the current item is checked and it is the last item
       newHeaderItems.push({
@@ -149,7 +142,7 @@ export default function HeadersForm() {
 
   const handleDelete = () => {
     if (headerItems.length > 3) {
-      setHeaderItems((prevItems) => prevItems.slice(0, -1));
+      removeHeader();
     }
   };
 

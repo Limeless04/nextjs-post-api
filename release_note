@@ -1,3 +1,7 @@
+v1.0.1
+
+- fixing issue when query not correctly updated
+
 v1.0.0
 
 - finishing nextjs-post-api

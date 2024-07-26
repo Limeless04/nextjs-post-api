@@ -108,6 +108,7 @@ export default function QueryForm() {
       queryName,
       queryValue,
     };
+    setQueryItems(newQueryItems);
 
     // Check if the new query value is not empty and if it's the last item
     if (queryName && index === queryItems.length - 1) {
@@ -120,7 +121,7 @@ export default function QueryForm() {
   const handleCheck = (index: number, isChecked: boolean) => {
     const newQueryItems = [...queryItems];
     newQueryItems[index] = { ...newQueryItems[index], isChecked };
-
+    setQueryItems(newQueryItems);
     if (!isChecked && queryItems.length > 1) {
       console.log(queryItems);
       // Remove the last item by slicing off the last element

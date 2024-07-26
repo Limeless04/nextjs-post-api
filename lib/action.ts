@@ -56,7 +56,9 @@ export async function fetchMethod(prevState: State, formData: FormData): Promise
     }
 
     const { method, address, querys, headers, body } = validateData.data;
+    console.log(querys)
     const objQuerys: QueryItemType[] = JSON.parse(querys)
+    console.log(objQuerys)
     const objHeaders: HeaderItemType[] = JSON.parse(headers)
     const cleanedQueries = objQuerys.filter(query => (query.queryName !== '' || query.queryValue !== '') && query.isChecked);
     // For headers
@@ -66,14 +68,18 @@ export async function fetchMethod(prevState: State, formData: FormData): Promise
     const headerMap = new Map(cleanedHeaders.map(header => [header.headerName,
     header.headerValue]));
 
+    console.log(queryMap)
+
     const url = new URL(address);
     queryMap.forEach((value, key) => {
         url.searchParams.append(key, value);
     });
+    console.log(url)
 
     // Construct the headers object
     const headersOpt = Object.fromEntries(headerMap);
     try {
+
         const startTime = Date.now();
 
         const response = await fetch(url.toString(), {
@@ -86,7 +92,6 @@ export async function fetchMethod(prevState: State, formData: FormData): Promise
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
-        console.log(response.headers)
         const contentLength = response.headers.get('Content-Length');
         const data = await response.json();
         console.log(contentLength)

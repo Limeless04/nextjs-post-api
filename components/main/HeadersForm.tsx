@@ -109,6 +109,7 @@ export default function HeadersForm() {
       headerName,
       headerValue,
     };
+    setHeaderItems(newHeaderItems);
 
     if (headerName && index === headerItems.length - 1) {
       newHeaderItems.push({
@@ -116,14 +117,15 @@ export default function HeadersForm() {
         headerValue: "",
         isChecked: false,
       });
+      setHeaderItems(newHeaderItems);
     }
-
-    setHeaderItems(newHeaderItems);
   };
 
   const handleCheck = (index: number, isChecked: boolean) => {
     const newHeaderItems = [...headerItems];
     newHeaderItems[index] = { ...newHeaderItems[index], isChecked };
+
+    setHeaderItems(newHeaderItems);
 
     if (!isChecked && headerItems.length > 3) {
       console.log(headerItems);

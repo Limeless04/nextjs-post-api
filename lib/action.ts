@@ -1,4 +1,3 @@
-"use server"
 
 import { z } from 'zod'
 import { QueryItemType } from '@/components/main/QueryForm';
@@ -56,9 +55,7 @@ export async function fetchMethod(prevState: State, formData: FormData): Promise
     }
 
     const { method, address, querys, headers, body } = validateData.data;
-    console.log(querys)
     const objQuerys: QueryItemType[] = JSON.parse(querys)
-    console.log(objQuerys)
     const objHeaders: HeaderItemType[] = JSON.parse(headers)
     const cleanedQueries = objQuerys.filter(query => (query.queryName !== '' || query.queryValue !== '') && query.isChecked);
     // For headers
@@ -68,13 +65,11 @@ export async function fetchMethod(prevState: State, formData: FormData): Promise
     const headerMap = new Map(cleanedHeaders.map(header => [header.headerName,
     header.headerValue]));
 
-    console.log(queryMap)
 
     const url = new URL(address);
     queryMap.forEach((value, key) => {
         url.searchParams.append(key, value);
     });
-    console.log(url)
 
     // Construct the headers object
     const headersOpt = Object.fromEntries(headerMap);
@@ -94,7 +89,6 @@ export async function fetchMethod(prevState: State, formData: FormData): Promise
         }
         const contentLength = response.headers.get('Content-Length');
         const data = await response.json();
-        console.log(contentLength)
         const size = contentLength ? parseInt(contentLength, 10) : 'unknown';
         return {
             data,

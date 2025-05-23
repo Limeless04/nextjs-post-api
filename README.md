@@ -16,7 +16,8 @@ Send HTTP requests, inspect responses, and save your API workflows — all from 
 
 ## 🖼️ Screenshot
 
-![screenshot](./screenshot.png) <!-- Optional: Add screenshot image -->
+![screenshot](![image](https://github.com/user-attachments/assets/603edd68-a7f3-44ee-9904-570f25df1fef)
+) <!-- Optional: Add screenshot image -->
 
 ## 🛠️ Tech Stack
 

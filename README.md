@@ -15,8 +15,7 @@ Send HTTP requests, inspect responses, and save your API workflows — all from 
 - 🎯 **Built with Next.js**: Full-stack capabilities and lightning-fast development.
 
 ## 🖼️ Screenshot
-
-![image](https://github.com/user-attachments/assets/603edd68-a7f3-44ee-9904-570f25df1fef)<!-- Optional: Add screenshot image -->
+![image](https://github.com/user-attachments/assets/cbc49d21-1fe9-47ad-8401-6bef87bb7f77)
 
 ## 🛠️ Tech Stack
 

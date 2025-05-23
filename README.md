@@ -31,5 +31,5 @@ Send HTTP requests, inspect responses, and save your API workflows — all from 
 ### 1. Clone the Repo
 
 ```bash
-git clone https://github.com/yourusername/nextjs-postman.git
+git clone git@github.com:Limeless04/nextjs-post-api.git
 cd nextjs-postman
